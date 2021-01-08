@@ -1,0 +1,269 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_tags %}
+{% block title %} Regestrations Form{% endblock %} 
+
+<!-- Element injected in the BODY element -->
+{% block body_class %} sidebar-mini sidebar-collapse {% endblock body_class %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+    
+{% endblock stylesheets %}
+
+{% block content %}    
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            
+          </div>
+          <div class="col-sm-6">
+            <!-- <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item active">Regestrations Form</li>
+            </ol> -->
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">New Clinent</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form method="post">
+              {% csrf_token %}
+                <div class="card-body">
+                 
+                    <div class="form-row">
+                      <div class="form-group col-md-4">
+                        <label for="inputEmail4">First Name</label>
+                        {{ form.PatientName|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="inputPassword4">Second Name</label>
+                        {{ form.PatientSecondName|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="inputPassword4">Last Name</label>
+                        {{ form.PatientThirdName|as_crispy_field }}
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="inputEmail4">Mobile Number</label>
+                        {{ form.PatientMobile1|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="inputPassword4">Mobile Number 2</label>
+                        {{ form.PatientMobile2|as_crispy_field }}
+                      </div>
+                      
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-3">
+                        <label for="inputCity">Birth Date</label>
+                        {{ form.Birtdate|as_crispy_field }}
+                      </div>
+                      <div class="form-group col-md-3">
+                        <label for="inputState">Gender</label>
+                        {{ form.Gender|as_crispy_field }}   
+                      </div>
+                      <div class="form-group col-md-3">
+                        <label for="inputZip">Job</label>
+                        {{ form.Jop|as_crispy_field }} 
+                      </div>
+                      <div class="form-group col-md-3">
+                        <label for="inputZip">Jop Area</label>
+                        {{ form.JopArea|as_crispy_field }} 
+                      </div>
+                    </div>
+                   
+                    <div class="form-row">
+                      <!-- <div class="form-group col-md-6">
+                        <label for="text" name="PatientBbarcode">City</label>
+                        <input type="text"  name="PatientBbarcode" class="form-control" id="inputCity">
+                      </div> -->
+                      <div class="form-group col-md-6">
+                        <label for="inputState">How Did you know us</label>
+                        <select id="select_box"  name="ComeFrom" class="form-control">
+                        <option  >selected</option>
+                          {% for item in ComeFrom%}
+                          <option value="{{item.pk}}">{{item.ComeFrom}}</option>
+                          {%endfor%}
+                        </select>
+                      </div>
+                       <br>
+                      <!-- <div   class="form-group col-md-4">
+                        <label for="inputState">How Did you know us</label>
+                        <select   class="form-control">
+                          
+                          {% for item in ComeFrom%}
+                          <option value={{item.pk}}>{{item.ComeFrom}}</option>
+                          {%endfor%}
+                        </select>
+                      </div> -->
+                      <div class="output">
+                        <div   class="form-group ">
+                          <div id="4" class="hide">
+                            <label for="">Referring Entity</label>  
+                            <select   name="PatientFfriend" class="form-control">
+                              <option  >selected</option>
+                            {% for item in objects %}
+                            <option value={{item.pk}}>{{item.PatientName}} {{item.PatientSecondName}}</option>
+                            {%endfor%}
+                          </select>
+                          </div>
+                        </div>  
+                        
+                        <div   class="form-group ">
+                          <div id="3" class="hide">
+                            <label for="">doctor name</label>
+                            <select  name="doctor" class="form-control">
+                              <option  value="">selected</option>
+                            {% for item in doctor %}
+                            <option value={{item.pk}}>{{item.DocName}} </option>
+                            {%endfor%}
+                          </select>
+                          </div>
+                        </div> 
+                        <div id="doctor" class="hide">
+                          <h2>This is id #c</h2>
+                        </div>
+                        <div id="Frind" class="hide">
+                          <h2>This is id #d</h2>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  
+                  
+                   <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                </div>
+                <!-- /.card-body -->
+
+                
+              </form>
+            </div></div></div>
+            <!-- /.card -->
+            <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Clinent Data</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+         <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Patient Name</th>
+                    <th>Gender</th>
+                    <th>Code</th>
+                     <th>Birtdate</th>
+                    <th>Jop</th>
+                    
+                    <th>Area</th>
+                    <th>PatientMobile1(s)</th>
+                    <th>PatientMobile2</th>
+                    
+                    <th>statu</th>
+                    <th>Change statu</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% for obj in objects %}
+                  <tr>
+                    <td>{{obj.PatientName}}</td>
+                    <td>{{obj.Gender}}</td>
+                    <td>{{obj.PatientCode}}</td>
+                    <td>{{obj.Birtdate}}</td>
+                    <td>{{obj.Jop}}</td>
+                    <td>{{obj.Area}}</td>
+                    <td>{{obj.PatientMobile1}}</td>
+                    <td>{{obj.PatientMobile2}}</td>
+                    
+                      {% if obj.Active == True %}
+                            <td class="p-3 mb-2 bg-success text-white" >Active </span></td>
+
+                            {% else %}
+                            <td class="p-3 mb-2 bg-danger text-white">Inactive </td>
+                            {% endif %}
+                            <td><a class="btn btn-warning" href="{% url 'onof-Patient'  obj.id %}">Change</a> </td>
+                            
+                        </tr>
+                   
+                      {% comment %} {% if obj.Active == True %} 
+                    <td class="bg-gradient-green">Active</td>
+                    {% else %}
+                    <td>Inactive</td>>
+                    {% endif %}
+
+                  </tr>{% endcomment %}
+                  {% endfor %} 
+                 
+                  </tfoot>
+                </table>
+        </div>
+        <!-- /.card-body -->
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+  <!-- jQuery -->
+  <script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- bs-custom-file-input -->
+  <script src="/static/assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="/static/assets/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="/static/assets/js/demo.js"></script>
+  <script>
+  $(function () {
+    bsCustomFileInput.init();
+  });
+  </script>
+<script>
+$('#select_box').change(function () {
+var select=$(this).find(':selected').val();        
+ $(".hide").hide();
+ $('#' + select).show();
+
+	    }).change();
+  </script>
+
+
+  
+
+{% endblock javascripts %}

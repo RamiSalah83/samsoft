@@ -1,0 +1,166 @@
+
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <title>Hello, world!</title>
+  </head>
+  <body>
+
+
+ <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="well-block">
+                        <div class="well-title">
+                            <h2>Questions? Book an Appointment</h2>
+                        </div>
+                        <form method="POST" action="" >
+                            {% csrf_token %}
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <div class="well-block">
+                                      <div class="well-title">
+                                          <h2> Book an Appointment</h2>
+                                      </div>
+                                      <form>
+                                          <!-- Form start -->
+                                          <div class="row">
+                                              <div class="col-md-6">
+                                                  <div class="form-group">
+                                                      <label class="control-label" for="name">Name</label>
+                                                      <select  name="Patient" class="form-control select2" >value="{{obj.event_name }}"
+                                                        <option value={{obj.event_name_id }}>{{obj.event_name }}</option>  
+                                                        {% for item in pe%}
+                                                        <option value={{item.pk}}>{{item.PatientName}}</option>
+                                                        {%endfor%}
+                                                    </select>
+                                                  </div>
+                                              </div>
+                                              <!-- Text input-->
+                                              <div class="col-md-6">
+                                                  <div class="form-group">
+                                                      <label class="control-label" for="email">Doctor</label>
+                                                      <select  name="doctor" class="form-control">
+                                                        <option value={{obj.event_doctor_id }}>{{obj.event_doctor }}</option> 
+                                                        {% for item in Doc%}
+                                                        <option value={{item.pk}}>{{item.DocName}}</option>
+                                                        {%endfor%}
+                                                    </select>
+                                                  </div>
+                                              </div>
+                                              <!-- Text input-->
+                                              <div class="col-md-6">
+                                                  <div class="form-group">
+                                                      <label class="control-label" for="date">Branch</label>
+                                                      <select  name="branch" class="form-control">
+                                                        <option value={{obj.branch_event_id }}>{{obj.branch_event }}</option> 
+                                                        {% for item in Br%}
+                                                        <option value={{item.id}}>{{item.BranchName}}</option>
+                                                        {%endfor%}
+                                                    </select>
+                                                  </div>
+                                              </div>
+                                              <!-- Select Basic -->
+                                              <div class="col-md-6">
+                                                  <div class="form-group">
+                                                      <label class="control-label" for="time">Clinic</label>
+                                                      <select  name="clinic" class="form-control">
+                                                        <option value={{obj.event_clinic_id }}>{{obj.event_clinic }}</option> 
+                                                        {% for item in Cl%}
+                                                        <option value={{item.pk}}>{{item.ClincName}}</option>
+                                                        {%endfor%}
+                                                      </select>
+                                                  </div>
+                                              </div>
+                                              <!-- Select Basic -->
+                                              <div class="col-md-6">
+                                                  <div class="form-group">
+                                                      <label class="control-label" for="appointmentfor">Appointment For</label>
+                                                      <select name="cat" class="form-control" onchange="showDiv(this)"  >
+                                                        <option value={{obj.event_service_id}}>{{obj.event_service }}</option> 
+                                                        {% for item in cat%}
+                                                        <option value={{item.pk}}>{{item.title}}</option>
+                                                        {%endfor%}
+                                                      </select>
+                                                  </div>
+                                              </div>
+                                              
+                                              <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label" for="date">Preferred Date</label>
+                                                    <input type="text" name="evtEnd" value="{{obj.start_date}}"/>
+                                                    
+                                                </div>
+                                            </div>
+                                              
+                                                <div class="form-group">
+                                                    <label >Appointment For</label>
+                                                    <select  name="area" class="locationMultiple form-control" multiple="multiple">
+                                                        {% for item in event_area.all%} 
+                                                        <option value={{obj.event_area_id }}>{{item.BodyPart}}</option>
+                                                        {%endfor%} 
+                                                      {% for item in pr%}
+                                                      <option value={{item.pk}}>{{item.BodyPart}}</option>
+                                                      {%endfor%}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                              <!-- Button -->
+                                              <div class="col-md-12">
+                                                  <div class="form-group">
+                                                      <button type="submit" class="btn btn-default" >Edit Appointment</button>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </form>
+                                      <!-- form end -->
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="well-block">
+                        <div class="well-title">
+                            <h2>Why Appointment with Us</h2>
+                        </div>
+                        <div class="feature-block">
+                            <div class="feature feature-blurb-text">
+                                <h4 class="feature-title">24/7 Hours Available</h4>
+                                <div class="feature-content">
+                                    <p>Integer nec nisi sed mi hendrerit mattis. Vestibulum mi nunc, ultricies quis vehicula et, iaculis in magnestibulum.</p>
+                                </div>
+                            </div>
+                            <div class="feature feature-blurb-text">
+                                <h4 class="feature-title">Experienced Staff Available</h4>
+                                <div class="feature-content">
+                                    <p>Aliquam sit amet mi eu libero fermentum bibendum pulvinar a turpis. Vestibulum quis feugiat risus. </p>
+                                </div>
+                            </div>
+                            <div class="feature feature-blurb-text">
+                                <h4 class="feature-title">Low Price & Fees</h4>
+                                <div class="feature-content">
+                                    <p>Praesent eu sollicitudin nunc. Cras malesuada vel nisi consequat pretium. Integer auctor elementum nulla suscipit in.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+Created by <a href="http://jituchauhan.com/">Jitu Chauhan</a>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

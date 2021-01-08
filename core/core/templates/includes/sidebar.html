@@ -1,0 +1,323 @@
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="/" class="brand-link">
+      <img src="/static/assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      
+      <span class="brand-text font-weight-light">Nova Beauty Centre</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="/static/assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="{% url 'logout' %}" class="d-block">
+            {{ request.user.username }} - Logout
+          </a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar"  id="mySearch" onkeyup="myFunction()" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" id="myMenu">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+               <br> 
+               
+               <li class="nav-item" >
+                <a href="{% url 'search' %}"  class="nav-link">
+                  <i class="nav-icon fas fa-search""></i>
+                  <p> Historical Search</p>
+                </a>
+              </li>
+              <br>
+          <li class="nav-item has-treeview menu-close">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Dashboard
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'home' %}" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Dashboard v1</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li> 
+          <br>
+          <!-- <li class="nav-item menu-close">
+            <a href="{% url 'search' %}" class="nav-link active">
+              <i class="nav-icon fas fa-search"></i>
+              <p>
+                Search
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'search' %}" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Simple Search</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li> -->
+          
+          {% if user.is_staff or user.section_name_id == 1  %}
+          <li class="nav-item menu-close">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-bullhorn"></i>
+              <p>
+                Reception
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              
+              <li class="nav-item">
+                <a href="{% url 'event_manage:reception_all_reserv' %}" target="_blank" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Reception</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'event_manage:manage-event' %}" target="_blank" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>calendar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'Patient-create' %}" target="_blank" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>New</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'just_payment' %}" target="_blank" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Payment</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'balls_transaction' %}" target="_blank" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pulse Transaction</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'refund' %}" target="_blank" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Refund</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          {%endif%}
+          <br>
+          {% if user.is_staff or user.section_name_id == 2  %}
+          <li class="nav-item menu-close">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-phone"></i>
+              <p>
+                Call Center
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <!-- <a href="{% url 'search' %}" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Simple Search</p>
+                </a> -->
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'calls:call_list' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Customers List</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'calls:Follow_up_calls' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Follow up calls today</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'calls:Follow_up_calls_all' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Follow up All calls</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          {%endif%}
+          <br>
+          {% if user.is_staff or user.section_name_id == 4  %}
+          
+          <li class="nav-item menu-close">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-user-md"></i>
+              <p>
+                Doctor
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'event_manage:reception_all_reserv' %}" target="_blank" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Reception</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+          {%endif%}
+          <br>
+          {% if user.is_staff %}
+          <li class="nav-item menu-close">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-cog"></i>
+              <p>
+                Admin Tools
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <!-- <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'Packages-create' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Laser Packaging</p>
+                </a>
+              </li> -->
+               {% comment %} <li class="nav-item">
+                <a href="{% url 'item-create' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>items create</p>
+                </a>
+              </li> {% endcomment %}
+              <li class="nav-item">
+                <a href="{% url 'room-create' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Room setting</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'clinic-create' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>clinic setting</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'DoctorOut-create' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>External Doctor</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'DoctorIn-create' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Internal Doctor</p>
+                </a>
+              </li>  
+              <li class="nav-item">
+                <a href="{% url 'area-create' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Area setting</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'branch-create' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Branch setting</p>
+                </a>
+              </li>
+             <li class="nav-item">
+                <a href="{% url 'Device-create' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Device setting</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'job-create' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Job setting</p>
+                </a>
+              </li>
+              <!-- <li class="nav-item">
+                <a href="{% url 'DoctorIn-create' %} " class="nav-link" target="_blank" >
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Doctor In setting</p>
+                </a>
+              </li>    -->
+                          
+              <li class="nav-item">
+                <a href="{% url 'itemP-create' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>leaser</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'itemS-create' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Derma</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'users_list' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Users</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          {%endif%}
+          <br>
+          
+          
+          
+          
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+  <script>
+function myFunction() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("mySearch");
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("myMenu");
+  li = ul.getElementsByTagName("li");
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+</script>

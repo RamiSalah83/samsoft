@@ -1,0 +1,228 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Bla
+nk Page {% endblock %} 
+
+<!-- Element injected in the BODY element -->
+{% block body_class %} sidebar-mini pace-primary {% endblock body_class %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+  <!-- pace-progress -->
+  <link rel="stylesheet" href="/static/assets/plugins/pace-progress/themes/black/pace-theme-flat-top.css">
+  <!-- adminlte-->
+  <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.1.1/fullcalendar.css'>
+  
+  
+{% endblock stylesheets %}
+
+{% block content %}  
+
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Blank Page</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Start</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <br>
+<br>
+<div class="container">
+  <h1>Heading Here</h1>
+  <div class="alert alert-warning">
+    <i class="glyphicon glyphicon-exclamation-sign"></i> From <strong>1st</strong> of <strong>Aprial</strong> As per labour law first 5 paid holiday consider as planning holidays.
+  </div>
+  <div id='calendarFull'></div>
+</div>
+
+<div class="modal fade" id="event-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="{% url 'event_manage:newevent' %}" >
+          {% csrf_token %}
+          <div class="form-group">
+            <label>Title</label>
+            
+            <select name="title" class="form-control select2" >
+              {% for item in pe%}
+              <option value={{item.pk}}>{{item.PatientName}}</option>
+              {%endfor%}
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Event start</label>
+            <input type="text" name="evtStart" class="form-control col-xs-3" />
+          </div>
+          <div class="form-group">
+            <label>Event end</label>
+            <input type="text" name="evtEnd" class="form-control col-xs-3" />
+          </div>
+          <div>
+            <br>
+        <button type="submit" class="btn btn-primary">Reserv</button>
+         </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+
+     
+    <!-- /.content -->
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+  <!-- jQuery -->
+ 
+  <!-- AdminLTE for demo purposes -->
+  <script src="/static/assets/js/demo.js"></script>
+  <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.1.1/fullcalendar.min.js'></script>
+<script src='https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js'></script><script  src="./script.js"></script>
+<script>
+  $('#calendarFull').fullCalendar({
+    plugins: [ 'bootstrap', 'interaction', 'dayGrid', 'timeGrid' ],
+    header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+    },
+    defaultView: 'month',
+    editable: true,
+    slotDuration: '00:15:00',
+    slotLabelInterval: 15,
+    
+    allDaySlot: true,
+    slotLabelFormat: {
+      hour: "numeric",
+      minute: "2-digit",
+      omitZeroMinute: true,
+      meridiem: "short"
+    },
+    selectOverlap: function(event) {
+        return event.rendering === 'background';
+    },
+    schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
+    groupByResource: true,
+    initialView: 'resourceTimeGridTwoDay',
+    initialDate: '2020-09-07',
+    editable: true,
+    selectable: true,
+    dayMaxEvents: true, // allow "more" link when too many events
+    dayMinWidth: 200,
+      resources: [
+          { id: 'truck1', title: 'Truck 1' },
+          { id: 'truck2', title: 'Truck 2' },
+          { id: 'truck3', title: 'Truck 3' }
+
+      ],
+      headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'resourceTimeGridDay,resourceTimeGridTwoDay,resourceTimeGridWeek,dayGridMonth'
+    },
+    views: {
+      resourceTimeGridTwoDay: {
+        type: 'resourceTimeGrid',
+        duration: { days: 2 },
+        buttonText: '2 days',
+      }
+    },
+    resources: [
+      { id: 'a', title: 'Room A' },
+      { id: 'b', title: 'Room B', eventColor: 'green' },
+      { id: 'c', title: 'Room C', eventColor: 'orange' },
+      { id: 'd', title: 'Room D', eventColor: 'red' }
+    ],
+    events: [
+          {% for i in filter.qs %}
+            {
+                title: "{{ i.event_name}}",
+                start: '{{ i.start_date.isoformat }}',
+                end: '{{ i.end_date.isoformat }}',
+                {% if i.arrive == True %}
+                    backgroundColor: '#00a65a', //Success (green)
+                    {% elif i.arrive == True and  i.start_session %}
+                    backgroundColor: '#f39c12', //yellow
+                    {%else%}
+                    backgroundColor: '#f39c12', //yellow
+                {%endif%}
+            },
+            {% endfor %}
+    ],
+    navLinks: true,
+    editable: true,
+    eventLimit: true,
+    selectable: true,
+    selectHelper: true,
+    select: function( start, end, jsEvent, view ) {
+        // set values in inputs
+        $('#event-modal').find('input[name=evtStart]').val(
+            start.format('YYYY-MM-DD HH:mm:ss')
+        );
+        $('#event-modal').find('input[name=evtEnd]').val(
+            end.format('YYYY-MM-DD HH:mm:ss')
+        );
+        
+        // show modal dialog
+        $('#event-modal').modal('show');
+        
+        /*
+        bind event submit. Will perform a ajax call in order to save the event to the database.
+        When save is successful, close modal dialog and refresh fullcalendar.
+        */
+        /*
+        $("#event-modal").find('form').on('submit', function() {
+            $.ajax({
+                url: 'yourFileUrl.php',
+                data: $("#event-modal").serialize(),
+                type: 'post',
+                dataType: 'json',
+                success: function(response) {
+                    // if saved, close modal
+                    $("#event-modal").modal('hide');
+                    
+                    // refetch event source, so event will be showen in calendar
+                    $("#calendar").fullCalendar( 'refetchEvents' );
+                }
+            });
+        });*/
+    },
+    selectHelper: true,
+    selectable: true,
+    snapDuration: '00:10:00'
+});
+</script>
+{% endblock javascripts %}

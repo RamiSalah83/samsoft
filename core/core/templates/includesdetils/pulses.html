@@ -1,0 +1,114 @@
+<div class="row">
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="info-box">
+        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-user-plus"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Total plus balls </span>
+          <span class="info-box-number">
+            <h4>{{total_plus_balls_in_order}}</h4>
+            
+          </span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="info-box mb-3">
+        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-user-minus"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Total used pulses</span>
+          <span class="info-box-number"><h3>{{total_cut_ballses}}</h3></span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+
+    <!-- fix for small devices only -->
+    <div class="clearfix hidden-md-up"></div>
+
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="info-box mb-3">
+        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-user-check"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">pulses for use</span>
+          <span class="info-box-number">{{total_ballses_remining}}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <!-- <div class="col-12 col-sm-6 col-md-3">
+      <div class="info-box mb-3">
+        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">New Members</span>
+          <span class="info-box-number">2,000</span>
+        </div>
+        
+      </div>
+      
+    </div> -->
+    <!-- /.col -->
+  </div>
+
+<!-- Default box -->
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">pulses</h3>
+
+    <div class="card-tools">
+      <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+        <i class="fas fa-minus"></i>
+      </button>
+      <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <table  class="table table-bordered table-striped">
+      <thead>
+        <th colspan="2" class="border-bottom-0">Additive</th>
+        <th colspan="2" class="border-bottom-0">Deductible</th>
+        
+      </tr>
+      <tr>
+        <th scope="col" class="border-bottom-0">ِAdd Type</th>
+        <th scope="col" class="border-bottom-0">pulses</th>
+        <th scope="col" class="border-bottom-0">Date</th>
+        <th scope="col" class="border-bottom-0">pulses</th>
+      </tr>
+      </thead>
+      <tbody>
+        {% for order_all_ballses, event   in objects_list %}
+        <tr>
+              
+          <td>{{order_all_ballses.order_type}}</td>
+          <td>{{order_all_ballses.balls}}</td>
+          
+          <td>{{event.start_session|date:'Y-m-d' }}</td>
+          <td>{{event.session_used_balls}}</td>
+          
+          
+          
+        </tr>
+      {% endfor %}
+      </tfoot>
+    </table>
+  </div>
+  <!-- /.card-body -->
+  <div class="card-footer">
+    
+  </div>
+  <!-- /.card-footer-->
+</div>
+<!-- /.card -->
